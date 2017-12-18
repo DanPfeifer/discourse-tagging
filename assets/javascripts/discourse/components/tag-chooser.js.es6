@@ -1,4 +1,4 @@
-import renderTag from 'discourse/plugins/discourse-tagging/lib/render-tag';
+/* import renderTag from 'discourse/plugins/discourse-tagging/lib/render-tag';
 
 function formatTag(t) {
   return renderTag(t.id, {count: t.count});
@@ -95,3 +95,20 @@ export default Ember.TextField.extend({
   }.on('willDestroyElement')
 
 });
+
+*/
+export default Ember.Component.extend({
+
+  _setupTags: function() {
+    const checked = this.get('checked');
+    const tags = checked ? ['ideaswelike'] || [];
+    this.set('value', tags.join(", "));
+  }.on('init'),
+
+  _valueChanged: function() {
+    const tags = this.get('value').split(',').map(v => v.trim()).reject(v => v.$
+    this.set('tags', tags);
+  }.observes('checked'),
+
+});
+
